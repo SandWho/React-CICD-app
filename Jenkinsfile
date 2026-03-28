@@ -10,7 +10,7 @@ pipeline{
 
                     image 'amazon/aws-cli'
                     reuseNode true
-                    args '--entrtypoint=""'
+                    args '--entrypoint=""'
                 }
             }
             steps{
