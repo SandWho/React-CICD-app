@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <h1>This is AN react CICD app</h1>
+    <h1>This is AN Jenkins app for S3</h1>
   );
 }
 
