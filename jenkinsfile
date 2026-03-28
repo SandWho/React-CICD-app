@@ -50,5 +50,27 @@ pipeline{
                 '''
             }
         }
+
+        stage('AWS'){
+            agent{
+                docker{
+                    image 'amazon/aws-cli'
+                    reuseNode true
+                    args '--entrypoint ""'
+                }
+            }
+            steps{
+                WithCredentials([usernamePassword(credentialsId: 'reactAWS', passwordVariable: 'AWS_SECRET')])
+                {
+                    //some block
+                    sh '''
+                    aws --version
+                    aws 3 ls
+                    echo "Hello, s3!" > index.html
+                    aws s3 cp index.html s3://bucket-name/index.html
+                    '''
+                }
+            }
+        }
     }
 }
