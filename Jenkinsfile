@@ -2,7 +2,24 @@ pipeline{
     agent any
 
     stages{
-        stage('Deoloy'){
+
+        stage('Build my image'){
+            agent{
+                docker{
+                    image 'amazon/aws-cli'
+                    reuseNode true
+                    args '-u root --entrypoint=""'
+                }
+            }
+            steps{
+                dnf install -y docker
+                docker build -t my-docker-image .
+                docker images
+            }
+
+        }
+
+        stage('Deploy'){
 
             agent
             {
